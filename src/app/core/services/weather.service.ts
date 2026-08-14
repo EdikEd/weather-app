@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.local';
+import { WeatherApiResponse } from '../models/weather.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class WeatherService {
       .set('client_id', this.clientId)
       .set('client_secret', this.clientSecret)
       .set('units', 'metric')
-      return this.http.get(
+      return this.http.get<WeatherApiResponse>(
         `${this.baseUrl}/observations/${encodeURIComponent(city)}`,
         { params }
       )

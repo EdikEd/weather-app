@@ -11,7 +11,7 @@
 
   <input
     [(ngModel)]="city"
-    placeholder="e.g. new yotk, ny"
+    placeholder="e.g. new york, ny"
     (keyup.enter)="loadWeather()"
   />
 
@@ -25,13 +25,7 @@
     <p>{{ error }}</p>
   }
 
-  @if (weather && !loading) {
-    <section>
-      <h2>{{ weather.place.name }}</h2>
-      <p>{{ weather.ob.weather }}</p>
-      <p>Temperature: {{ weather.ob.tempC }} °C</p>
-      <p>Humidity: {{ weather.ob.humidity }} %</p>
-      <p>Wind: {{ weather.ob.windSpeedKPH }} km/h</p>
-    </section>
+  @if (!loading) {
+    <app-current-weather [weather]="weather" />
   }
 </main>

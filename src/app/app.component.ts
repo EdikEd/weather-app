@@ -2,17 +2,19 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WeatherService } from './core/services/weather.service';
 import { FormsModule } from '@angular/forms';
+import { CurrentWeather } from './core/models/weather.model';
+import { CurrentWeatherComponent } from './features/weather/current-weather/current-weather.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, CurrentWeatherComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   title = 'Weather App';
   private weatherService = inject(WeatherService);  
-  weather: any;
+  weather: CurrentWeather | null = null;
   city = 'new york, ny';
   error = '';
   loading = false;
@@ -39,10 +41,10 @@ export class AppComponent implements OnInit {
 
     this.weatherService.getCurrentWeather(this.city)
       .subscribe({
-        next: (result: any) => {
-          this.weather = result.response;
-          this.loading = false;
-        }
+        next: (result) => {
+        this.weather = result.response?.place ? result.response : null;
+        this.loading = false;
+      },
       })
       error: () => {
         this.error = 'Could not load weather for this location';

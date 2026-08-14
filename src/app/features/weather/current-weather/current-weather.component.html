@@ -1,1 +1,14 @@
-<p>current-weather works!</p>
+@if (weather(); as currentWeather) {
+  <section class="weather-card">
+    <h2>{{ currentWeather.place.name }}</h2>
+    <p>{{ currentWeather.ob.weather }}</p>
+    <p class="temperature">{{ currentWeather.ob.tempC }} °C</p>
+    <p>Humidity: {{ currentWeather.ob.humidity }}%</p>
+    <p>Wind: {{ currentWeather.ob.windSpeedKPH }} km/h</p>
+  </section>
+} @else {
+  <section class="weather-card placeholder">
+    <h2>No weather data available</h2>
+    <p>Try another city.</p>
+  </section>
+}
