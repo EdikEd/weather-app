@@ -1,1 +1,37 @@
-<h1>{{ title }}</h1>
+<main>
+  <h1>Weather Dashboard</h1>
+
+  <div class="city-buttons">
+    @for (cityOption of cities; track cityOption.value) {
+      <button type="button" (click)="selectCity(cityOption.value)">
+        {{ cityOption.label }}
+      </button>
+    }
+  </div>
+
+  <input
+    [(ngModel)]="city"
+    placeholder="e.g. new yotk, ny"
+    (keyup.enter)="loadWeather()"
+  />
+
+  <button (click)="loadWeather()">Search</button>
+
+  @if (loading) {
+    <p>Loading weather ...</p>
+  }
+
+  @if (error) {
+    <p>{{ error }}</p>
+  }
+
+  @if (weather && !loading) {
+    <section>
+      <h2>{{ weather.place.name }}</h2>
+      <p>{{ weather.ob.weather }}</p>
+      <p>Temperature: {{ weather.ob.tempC }} °C</p>
+      <p>Humidity: {{ weather.ob.humidity }} %</p>
+      <p>Wind: {{ weather.ob.windSpeedKPH }} km/h</p>
+    </section>
+  }
+</main>
