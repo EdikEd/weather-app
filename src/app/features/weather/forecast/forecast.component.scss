@@ -1,0 +1,39 @@
+.forecast {
+  margin-top: 2rem;
+}
+
+.forecast h2 {
+  margin-bottom: 1rem;
+  color: #0f172a;
+}
+
+.forecast-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(140px, 1fr));
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.forecast-day {
+  min-width: 140px;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #f8fbff;
+  box-shadow: 0 2px 8px rgb(15 23 42 / 8%);
+}
+
+.forecast-day p {
+  margin: 0 0 0.65rem;
+}
+
+.forecast-day strong {
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+.forecast-day span {
+  color: #64748b;
+}

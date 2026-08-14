@@ -1,1 +1,17 @@
-<p>forecast works!</p>
+@if (forecast(); as forecastData) {
+  <section class="forecast">
+    <h2>5-day forecast for {{ forecastData.place.name }}</h2>
+
+    <div class="forecast-list">
+      @for (day of forecastData.periods; track day.dateTimeISO) {
+        <article class="forecast-day">
+          <p>{{ day.dateTimeISO | date: "EEE, MMM d" }}</p>
+          <p>{{ day.weather }}</p>
+          <strong>{{ day.maxTempC }} °C</strong>
+          <span>{{ day.minTempC }} °C</span>
+          <p>Rain: {{ day.pop }}%</p>
+        </article>
+      }
+    </div>
+  </section>
+}
